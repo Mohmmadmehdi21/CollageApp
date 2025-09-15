@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "523980136572",
+    "project_id": "sliss-7e0ad",
+    "storage_bucket": "sliss-7e0ad.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:523980136572:android:188e58e825cc515e3069f9",
+        "android_client_info": {
+          "package_name": "com.example.project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-rFwR-rONSNEZMjIkQiwKo9Tdr4t_oOs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
