@@ -200,57 +200,64 @@ class LibraryPage extends StatelessWidget {
               const SizedBox(height: 12),
 
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   // Available Seats Box
-                  Container(
-                    width: 150,
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF10103F),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: const Column(
-                      children: [
-                        Text(
-                          "Available",
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.green),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF10103F),
+                          borderRadius: BorderRadius.circular(12),
                         ),
-                        SizedBox(height: 8),
-                        Text(
-                          "Seat Count : 20",
-                          style: TextStyle(color: Colors.white),
+                        child: const Column(
+                          children: [
+                            Text(
+                              "Available",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.green),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              "Seat Count : 20",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
 
                   // Occupied Seats Box
-                  Container(
-                    width: 150,
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF10103F),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: const Column(
-                      children: [
-                        Text(
-                          "Occupied",
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.red),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF10103F),
+                          borderRadius: BorderRadius.circular(12),
                         ),
-                        SizedBox(height: 8),
-                        Text(
-                          "Seat Count : 10",
-                          style: TextStyle(color: Colors.white),
+                        child: const Column(
+                          children: [
+                            Text(
+                              "Occupied",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.red),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              "Seat Count : 10",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ],
@@ -360,7 +367,49 @@ class PaymentPage extends StatelessWidget {
               leading: const Icon(Icons.qr_code, color: Colors.green),
               title: const Text("UPI Payment",
                   style: TextStyle(color: Colors.white)),
-              onTap: () {},
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      backgroundColor: const Color(0xFF1A1A2E),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12)),
+                      title: const Text(
+                        "Scan & Pay",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Image.asset(
+                            "android/assets/qr.jpg", // ✅ FIXED PATH
+                            width: 200,
+                            height: 200,
+                            fit: BoxFit.contain,
+                          ),
+                          const SizedBox(height: 12),
+                          const Text(
+                            "Scan this QR to complete payment",
+                            style: TextStyle(
+                                color: Colors.white70, fontSize: 14),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text("Close",
+                              style: TextStyle(color: Colors.purpleAccent)),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
             ),
             ListTile(
               leading: const Icon(Icons.credit_card, color: Colors.blue),
@@ -370,8 +419,8 @@ class PaymentPage extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.account_balance, color: Colors.orange),
-              title:
-              const Text("Net Banking", style: TextStyle(color: Colors.white)),
+              title: const Text("Net Banking",
+                  style: TextStyle(color: Colors.white)),
               onTap: () {},
             ),
 
@@ -382,8 +431,8 @@ class PaymentPage extends StatelessWidget {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.purpleAccent,
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 40, vertical: 14),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12)),
                 ),
