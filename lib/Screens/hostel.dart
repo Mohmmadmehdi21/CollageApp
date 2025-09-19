@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 
 class HostelPage extends StatelessWidget {
   const HostelPage({super.key});
 
-  // Helper function for card
+  // ✅ Helper function for card
   Widget _buildInfoCard(
       IconData icon,
       String title,
@@ -16,11 +17,12 @@ class HostelPage extends StatelessWidget {
       color: const Color(0xFF211D37),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
-        onTap: onTap, // ✅ Click event
+        onTap: onTap,
         leading: Icon(icon, color: iconColor, size: 30),
         title: Text(
           title,
-          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          style: const TextStyle(
+              color: Colors.white, fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
           subtitle,
@@ -31,35 +33,93 @@ class HostelPage extends StatelessWidget {
     );
   }
 
-  // ✅ Popup dialog for "Under Progress"
-  void _showUnderProgressDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          backgroundColor: const Color(0xFF1A1736),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          title: const Text(
-            "Location Tracker",
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-          content: const Text(
-            "This feature is under progress...",
-            style: TextStyle(color: Colors.white70),
-          ),
-          actions: [
-            ElevatedButton(
-              onPressed: () => Navigator.pop(context),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.purpleAccent,
-                foregroundColor: Colors.white,
-              ),
-              child: const Text("OK"),
+  // ✅ Function to get location
+  Future<Position> _getCurrentLocation() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // Service enabled check
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      throw Exception("Location services are disabled.");
+    }
+
+    // Permission check
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        throw Exception("Location permission denied.");
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      throw Exception("Location permissions are permanently denied.");
+    }
+
+    // Get current location
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+  }
+
+  // ✅ Popup dialog for Location
+  void _showLocationDialog(BuildContext context) async {
+    try {
+      Position pos = await _getCurrentLocation();
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: const Color(0xFF1A1736),
+            shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            title: const Text(
+              "Your Location",
+              style:
+              TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
-          ],
-        );
-      },
-    );
+            content: Text(
+              "Latitude: ${pos.latitude}\nLongitude: ${pos.longitude}",
+              style: const TextStyle(color: Colors.white70),
+            ),
+            actions: [
+              ElevatedButton(
+                onPressed: () => Navigator.pop(context),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.purpleAccent,
+                  foregroundColor: Colors.white,
+                ),
+                child: const Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+    } catch (e) {
+      // Error case (no permission / no gps)
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: const Color(0xFF1A1736),
+            title: const Text("Error",
+                style: TextStyle(color: Colors.redAccent)),
+            content: Text("$e",
+                style: const TextStyle(color: Colors.white70)),
+            actions: [
+              ElevatedButton(
+                onPressed: () => Navigator.pop(context),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.purpleAccent,
+                  foregroundColor: Colors.white,
+                ),
+                child: const Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
   @override
@@ -79,7 +139,8 @@ class HostelPage extends StatelessWidget {
           const SizedBox(height: 24),
 
           // Room Info
-          _buildInfoCard(Icons.meeting_room, "Room No: B-203", "Block: B | Floor: 2"),
+          _buildInfoCard(Icons.meeting_room, "Room No: B-203",
+              "Block: B | Floor: 2"),
 
           // Hostel Fee
           _buildInfoCard(
@@ -94,7 +155,8 @@ class HostelPage extends StatelessWidget {
           ),
 
           // Warden Info
-          _buildInfoCard(Icons.person, "Warden: Mr. Sharma", "Contact: +91 98765 12345"),
+          _buildInfoCard(Icons.person, "Warden: Mr. Sharma",
+              "Contact: +91 98765 12345"),
 
           // Mess Facility
           _buildInfoCard(
@@ -108,18 +170,18 @@ class HostelPage extends StatelessWidget {
             ),
           ),
 
-          // ✅ New Location Tracker card with click action
+          // ✅ Location Tracker card (Now functional)
           _buildInfoCard(
             Icons.location_on,
             "Location Tracker",
-            "Only for hostler",
+            "Track your current location",
             iconColor: Colors.redAccent,
             trailing: const Text(
-              "Under Progress",
+              "Tap to Check",
               style: TextStyle(
                   color: Colors.orangeAccent, fontWeight: FontWeight.bold),
             ),
-            onTap: () => _showUnderProgressDialog(context), // ✅ Click action
+            onTap: () => _showLocationDialog(context),
           ),
         ],
       ),

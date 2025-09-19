@@ -25,170 +25,169 @@ class LibraryPage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              // 🔹 Books Management Section
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(14),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF10103F),
+              // 🔹 Books Management Section (Card instead of Container)
+              Card(
+                color: const Color(0xFF10103F),
+                shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Center(
-                      child: Text(
-                        "BOOKS MANAGMENT",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white70,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Book Info
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                "Issued Book:\nProgramming C",
-                                style: TextStyle(
-                                    fontSize: 16, color: Colors.white),
-                              ),
-                              SizedBox(height: 8),
-                              Text(
-                                "Issue Date: Mon Sep 01 2025",
-                                style: TextStyle(color: Colors.white70),
-                              ),
-                              Text(
-                                "Return Date: Mon Sep 08 2025",
-                                style: TextStyle(color: Colors.white70),
-                              ),
-                              SizedBox(height: 6),
-                              Text(
-                                "Fine: Rs. 40",
-                                style: TextStyle(
-                                    color: Colors.redAccent,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
+                child: Padding(
+                  padding: const EdgeInsets.all(14),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Center(
+                        child: Text(
+                          "BOOKS MANAGMENT",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white70,
                           ),
                         ),
-
-                        // Pay Now Button
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const PaymentPage()),
-                            );
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 12),
-                            decoration: BoxDecoration(
-                              color: Colors.purpleAccent,
-                              borderRadius: BorderRadius.circular(20),
+                      ),
+                      const SizedBox(height: 16),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Book Info
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: const [
+                                Text(
+                                  "Issued Book:\nProgramming C",
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.white),
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  "Issue Date: Mon Sep 01 2025",
+                                  style: TextStyle(color: Colors.white70),
+                                ),
+                                Text(
+                                  "Return Date: Mon Sep 08 2025",
+                                  style: TextStyle(color: Colors.white70),
+                                ),
+                                SizedBox(height: 6),
+                                Text(
+                                  "Fine: Rs. 40",
+                                  style: TextStyle(
+                                      color: Colors.redAccent,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
                             ),
+                          ),
+
+                          // Pay Now Button (styled ElevatedButton)
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.purpleAccent,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 12),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              elevation: 0,
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const PaymentPage()),
+                              );
+                            },
                             child: const Text(
                               "Pay Now",
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
 
               const SizedBox(height: 20),
 
-              // 🔹 Library Management Section
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(14),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF10103F),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Column(
-                  children: [
-                    const Center(
-                      child: Text(
-                        "LIBRARY MANAGMENT",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white70,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-
-                    Row(
-                      children: [
-                        // Available Seats Info
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                "Available Seats",
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                              SizedBox(height: 6),
-                              Text(
-                                "15 seats available",
-                                style: TextStyle(
-                                    fontSize: 16, color: Colors.green),
-                              ),
-                            ],
+              // 🔹 Library Management Section (Card)
+              Card(
+                color: const Color(0xFF10103F),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)),
+                child: Padding(
+                  padding: const EdgeInsets.all(14),
+                  child: Column(
+                    children: [
+                      const Center(
+                        child: Text(
+                          "LIBRARY MANAGMENT",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white70,
                           ),
                         ),
-
-                        // View All Button -> Navigate
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                  const SeatAvailabilityPage()),
-                            );
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 26, vertical: 12),
-                            decoration: BoxDecoration(
-                              color: Colors.green,
-                              borderRadius: BorderRadius.circular(20),
+                      ),
+                      const SizedBox(height: 16),
+                      Row(
+                        children: [
+                          // Available Seats Info
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: const [
+                                Text(
+                                  "Available Seats",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                ),
+                                SizedBox(height: 6),
+                                Text(
+                                  "15 seats available",
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.green),
+                                ),
+                              ],
                             ),
+                          ),
+
+                          // View All Button -> styled ElevatedButton
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.green,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 26, vertical: 12),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              elevation: 0,
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                    const SeatAvailabilityPage()),
+                              );
+                            },
                             child: const Text(
                               "View All",
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
 
               const SizedBox(height: 20),
 
-              // 🔹 Seats Available Section
+              // 🔹 Seats Available Section (heading)
               const Text(
                 "Seats Available",
                 style: TextStyle(
@@ -199,63 +198,64 @@ class LibraryPage extends StatelessWidget {
               ),
               const SizedBox(height: 12),
 
+              // Two cards side by side; use Expanded + Padding (no fixed width)
               Row(
                 children: [
-                  // Available Seats Box
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(10),
-                      child: Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF10103F),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: const Column(
-                          children: [
-                            Text(
-                              "Available",
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.green),
-                            ),
-                            SizedBox(height: 8),
-                            Text(
-                              "Seat Count : 20",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ],
+                      child: Card(
+                        color: const Color(0xFF10103F),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            children: const [
+                              Text(
+                                "Available",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.green),
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                "Seat Count : 20",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
 
-                  // Occupied Seats Box
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(10),
-                      child: Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF10103F),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: const Column(
-                          children: [
-                            Text(
-                              "Occupied",
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.red),
-                            ),
-                            SizedBox(height: 8),
-                            Text(
-                              "Seat Count : 10",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ],
+                      child: Card(
+                        color: const Color(0xFF10103F),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            children: const [
+                              Text(
+                                "Occupied",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red),
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                "Seat Count : 10",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -287,7 +287,6 @@ class SeatAvailabilityPage extends StatelessWidget {
         title: const Text("Seat Availability"),
         backgroundColor: const Color(0xFF1A1A2E),
       ),
-      backgroundColor: const Color(0xFF0D0D1A),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: GridView.builder(
@@ -301,9 +300,9 @@ class SeatAvailabilityPage extends StatelessWidget {
           ),
           itemBuilder: (context, index) {
             bool available = seats[index];
-            return Container(
-              decoration: BoxDecoration(
-                color: available ? Colors.green : Colors.red,
+            return Card(
+              color: available ? Colors.green : Colors.red,
+              shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Center(
@@ -383,7 +382,7 @@ class PaymentPage extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Image.asset(
-                            "android/assets/qr.jpg", // ✅ FIXED PATH
+                            "android/assets/qr.jpg", // change if your asset path differs
                             width: 200,
                             height: 200,
                             fit: BoxFit.contain,
@@ -391,8 +390,8 @@ class PaymentPage extends StatelessWidget {
                           const SizedBox(height: 12),
                           const Text(
                             "Scan this QR to complete payment",
-                            style: TextStyle(
-                                color: Colors.white70, fontSize: 14),
+                            style:
+                            TextStyle(color: Colors.white70, fontSize: 14),
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -431,8 +430,8 @@ class PaymentPage extends StatelessWidget {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.purpleAccent,
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 40, vertical: 14),
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12)),
                 ),

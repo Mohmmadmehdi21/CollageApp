@@ -69,7 +69,7 @@ class _Login extends State<Login> {
                     child: Column(
                       children: [
                         Text(
-                          '😊Welcom Back..!',
+                          '😊Welcome Back..!',
                           style: GoogleFonts.robotoSlab(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
